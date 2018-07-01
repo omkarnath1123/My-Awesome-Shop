@@ -46,6 +46,7 @@ class FullView extends Component {
         }
 
         
+        
 
 
         handleColorButtons = (colorButtonId) =>{

@@ -1,0 +1,39 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+ }
+ 
+ li {
+    float: right;
+ }
+ 
+ li a {
+    font-size: small;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+ }
+ 
+ /* Change the link color to #111 (black) on hover */
+ li a:hover {
+    background-color: #111;
+    color:white;
+ }
+ 
+ .navdiv{
+    background-color:#cccccc;
+     
+    border-bottom:2px solid black;
+
+    margin-left: 150px ;
+    margin-right: 120px;
+ }
+ 
+ .myawesomeshop{
+    float: left;
+ }

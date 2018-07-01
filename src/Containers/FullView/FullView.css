@@ -1,0 +1,15 @@
+
+
+.divCl{
+    width: 400px;
+    height: 600px;
+}
+
+.image-gallery-slide img{
+
+    min-height: 450px;
+    max-height: 451px;
+
+}
+
+

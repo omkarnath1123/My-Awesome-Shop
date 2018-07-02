@@ -13,17 +13,13 @@ class FullView extends Component {
             loadedPost: null,
             selectedId: null,
             pageLength: 200,
-            setColorId: null,
-            setStorageId: null,
-            CurrentObjectColorId: null,
-            CurrentObjectStorageId:null,
-
+            selectedOptions: []
         }
         componentDidMount(){
                 if(!this.state.loadedPost|| (this.state.loadedPost && this.state.selectedId!==this.props.match.params.id)){
                     axios.get('https://assignment-appstreet.herokuapp.com/api/v1/products/'+ this.props.match.params.id)
                         .then(response=>{
-                                this.setState({loadedPost: response.data, selectedId: this.props.match.params.id, CurrentObjectColorId: response.data.selected_option_ids[1],CurrentObjectStorageId: response.data.selected_option_ids[0]});
+                                this.setState({loadedPost: response.data, selectedId: this.props.match.params.id, selectedOptions: response.data.selected_option_ids});
                             });
                 }   
             
@@ -62,77 +58,28 @@ class FullView extends Component {
         //     return true;
         // }
 
-        isEqual(selected,arr1){
-  
-            const set1 = new Set();
-            
-            selected.map(id=>{
-              set1.add(id);
-            })
-            
-           var i = 0;
-            while( i < arr1.size ){
-              if(set1.has(arr1[i])){
-                i++;
-              }
-            else
-              return false
-              }
-            return true;
-          }
+        isEqual(arr1,arr2){
+
+            if ((arr1[0] ===  arr2[0] && arr1[1] === arr2[1]) || (arr1[0] ===  arr2[1] && arr1[1] === arr2[0]) ){
+                return true;
+            }
+                return false;
+        }
+
 
         handleColorButtons = (colorButtonId) =>{
-            console.log(colorButtonId)
-            this.setState({setColorId:colorButtonId});
-            let tempArr = [];
-            tempArr.push(this.state.CurrentObjectStorageId);
-            tempArr.push(colorButtonId)
-            console.log(tempArr)
+            let tempArr = this.state.selectedOptions;
+            tempArr[1] = colorButtonId;
+            this.setState({selectedOptions: tempArr})
+            console.log(this.state.selectedOptions)
 
-            var proDuct_id = this.state.selectedId;
-
-            if(!this.isEqual(tempArr,this.state.loadedPost.selected_option_ids)){
-                var proVariations = this.state.loadedPost.product_variations;
-                    proVariations.map(pro=>{
-                        if(this.isEqual(pro.sign,tempArr)){
-                            proDuct_id = pro._id
-                        }
-                    })
-                   
-            }
-            axios.get('https://assignment-appstreet.herokuapp.com/api/v1/products/'+ proDuct_id)
-            .then(response=>{
-                    this.setState({loadedPost: response.data, selectedId: proDuct_id, CurrentObjectColorId: colorButtonId});
-                });
-           
         }
 
         handleStoreButtons = (storeButtonId) =>{
-            console.log(storeButtonId)
-
-            this.setState({setStorageId:storeButtonId});
-            let tempArr = [];
-            tempArr.push(storeButtonId);
-            tempArr.push(this.state.CurrentObjectColorId);
-            console.log(tempArr)
-            var proDuct_id = null;
-            if(!this.isEqual(tempArr,this.state.loadedPost.selected_option_ids)){
-                var proVariations = this.state.loadedPost.product_variations;
-                    proVariations.map(pro=>{
-                        if(this.isEqual(pro.sign,tempArr)){
-                            proDuct_id = pro._id
-                        }
-                    })
-                       
-            }
-            axios.get('https://assignment-appstreet.herokuapp.com/api/v1/products/'+ proDuct_id)
-                    .then(response=>{
-                            this.setState({loadedPost: response.data, selectedId: proDuct_id,CurrentObjectStorageId: storeButtonId});
-                        }); 
-            
-            // this.setState({IdTobeLoaded:proDuct_id})
-            // this.props.history.push('/'+proDuct_id)
-
+            let tempArr = this.state.selectedOptions;
+            tempArr[0] = storeButtonId;
+            this.setState({selectedOptions: tempArr})
+            console.log(this.state.selectedOptions)
         }
 
         render(){
@@ -149,18 +96,18 @@ class FullView extends Component {
                 var postTemp = post.slice(0,this.state.pageLength);
               
 
-                var selectedOptions = this.state.loadedPost.selected_option_ids;
+
                 var proVariations = this.state.loadedPost.product_variations;
-                var tempArrImage = null;
-                var proName = null;
+                var tempArrImage = [];
+                var proName = [];
+
                     proVariations.map(pro=>{
-                        if(this.isEqual(pro.sign,selectedOptions)){
+                        if(this.isEqual(pro.sign,this.state.selectedOptions)){
                             tempArrImage = pro.images;
                             proName = pro.name;
-                    // console.log(this.isEqual1(pro.sign,selectedOptions))
-
                         }
                     })
+
 
 
                     //Carousel
@@ -197,11 +144,6 @@ class FullView extends Component {
                             ColorOptions.push(new Object(TempOpt))
                         }
                     });
-                    //  console.log(StorageOptions);
-                    // StorageOptions.map(opt=>{
-                    //     console.log(opt)
-                    // })
-                    // console.log(ColorOptions);
                     
                     storageButton = <Storageoptions typ= 'Storage' arr={StorageOptions} clickedS = {this.handleStoreButtons}/>
                     colorButton  =  <Coloroptions typ= 'Colors' arr={ColorOptions} clickedC= {this.handleColorButtons}/>

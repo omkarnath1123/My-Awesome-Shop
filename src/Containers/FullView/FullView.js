@@ -69,19 +69,75 @@ class FullView extends Component {
 
         handleColorButtons = (colorButtonId) =>{
             let tempArr = this.state.selectedOptions;
-            tempArr[1] = colorButtonId;
-            this.setState({selectedOptions: tempArr})
-            console.log(this.state.selectedOptions)
+            ////
+            var TempOpt = this.state.loadedPost.options;
+            var tempAttrid = null;
+            TempOpt.map(findId=>{
+                if(findId._id === colorButtonId){
+                    tempAttrid = findId.attrib_id;
+                }
+            })
+            var tempAttrArr = this.state.loadedPost.attributes;
+
+            var tempAttrName = null;
+            tempAttrArr.map(fId=>{
+                if(fId._id === tempAttrid){
+                    tempAttrName = fId.name;
+                }
+            })
+            console.log(tempAttrName);
+
+            if (tempAttrName === "Colour" ){
+                tempArr[0] = colorButtonId;
+                this.setState({selectedOptions: tempArr})
+                console.log(tempArr)
+
+            }
+
+
+
+            ////
+            // tempArr[1] = colorButtonId;
+            // this.setState({selectedOptions: tempArr})
+            // console.log(this.state.selectedOptions)
 
         }
 
         handleStoreButtons = (storeButtonId) =>{
+            // let tempArr = this.state.selectedOptions;
+            // tempArr[0] = storeButtonId;
+            // this.setState({selectedOptions: tempArr})
+            // console.log(this.state.selectedOptions)
+            
             let tempArr = this.state.selectedOptions;
-            tempArr[0] = storeButtonId;
-            this.setState({selectedOptions: tempArr})
-            console.log(this.state.selectedOptions)
-        }
+            ////
+            var TempOpt = this.state.loadedPost.options;
+            var tempAttrid = null;
+            TempOpt.map(findId=>{
+                if(findId._id === storeButtonId){
+                    tempAttrid = findId.attrib_id;
+                }
+            })
 
+            var tempAttrArr = this.state.loadedPost.attributes;
+
+            var tempAttrName = null;
+            tempAttrArr.map(fId=>{
+                if(fId._id === tempAttrid){
+                    tempAttrName = fId.name;
+                }
+            })
+            console.log(tempAttrName);
+
+            if(tempAttrName === 'Storage'){
+                tempArr[1] = storeButtonId;
+                this.setState({selectedOptions: tempArr})
+                console.log(tempArr)
+            }
+
+
+        }
+        
         render(){
 
             let post = <p style={{textAlign:'center'}}>Please select an Item!</p>;

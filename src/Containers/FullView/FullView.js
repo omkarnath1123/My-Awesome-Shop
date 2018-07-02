@@ -201,8 +201,8 @@ class FullView extends Component {
                         }
                     });
                     
-                    storageButton = <Storageoptions typ= 'Storage' arr={StorageOptions} clickedS = {this.handleStoreButtons}/>
-                    colorButton  =  <Coloroptions typ= 'Colors' arr={ColorOptions} clickedC= {this.handleColorButtons}/>
+                    storageButton = <Storageoptions typ= 'Storage' arr={StorageOptions} clickedS = {this.handleStoreButtons} options={this.state.selectedOptions}/>
+                    colorButton  =  <Coloroptions typ= 'Colors' arr={ColorOptions} clickedC= {this.handleColorButtons} options={this.state.selectedOptions}/>
                             
             }
 

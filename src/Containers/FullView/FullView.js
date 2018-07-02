@@ -33,21 +33,53 @@ class FullView extends Component {
             this.setState({pageLength:length})
         }
 
-        isEqual(Arr1,Arr2){
-            if(Arr1.length !== Arr2.length) return false;
-            var i=0;
-            while(i < Arr1.length){
-                if(Arr1[i]===Arr2[i]) {
-                    i++;
-                }
-                else return false;
-            }
+        // isEqual(Arr1,Arr2){
+        //     if(Arr1.length !== Arr2.length) return false;
+        //     var i=0;
+        //     while(i < Arr1.length){
+        //         if(Arr1[i]===Arr2[i]) {
+        //             i++;
+        //         }
+        //         else return false;
+        //     }
+        //     return true;
+        // }
+        
+        // isEqual1(Arr1,Arr2){
+        //     if(Arr1.length !== Arr2.length) return false;
+        //     var i = 0;
+        //     const set1 = new Set();  
+        //     Arr1.map(id=>{
+        //         set1.add(id)
+        //     })
+
+        //     while(i < Arr2.size){
+        //         if(set1.has(Arr2[i])){
+        //             i++;
+        //         }
+        //         else return false;
+        //     }
+        //     return true;
+        // }
+
+        isEqual(selected,arr1){
+  
+            const set1 = new Set();
+            
+            selected.map(id=>{
+              set1.add(id);
+            })
+            
+           var i = 0;
+            while( i < arr1.size ){
+              if(set1.has(arr1[i])){
+                i++;
+              }
+            else
+              return false
+              }
             return true;
-        }
-
-        
-        
-
+          }
 
         handleColorButtons = (colorButtonId) =>{
             console.log(colorButtonId)
@@ -125,8 +157,12 @@ class FullView extends Component {
                         if(this.isEqual(pro.sign,selectedOptions)){
                             tempArrImage = pro.images;
                             proName = pro.name;
+                    // console.log(this.isEqual1(pro.sign,selectedOptions))
+
                         }
                     })
+
+
                     //Carousel
                     var newArr = new Array;
                     tempArrImage.map(pics=>{

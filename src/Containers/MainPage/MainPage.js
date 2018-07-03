@@ -4,6 +4,7 @@ import Posts from '../Posts/Posts'
 import './MainPage.css';
 import { Route, Switch } from 'react-router-dom';
 import Navbar from '../../Components/Navbar/Navbar';
+import Footer from '../../Components/bottomNav/bottomNav';
 
 import FullView from '../FullView/FullView';
 
@@ -23,6 +24,7 @@ class MainPage extends Component{
                     <Route path="/" exact component={Posts} />
                     <Route path="/:id" exact component={FullView} />
                 </Switch>
+                <Footer/>
             </div>
         )
     }

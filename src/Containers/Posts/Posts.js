@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import Post from '../../Components/Post/Post';
 import axios from 'axios';
 import './Posts.css';
-import ScrollEvent from 'react-onscroll';
-
+import OnScroll from 'react-on-scroll';
 // import {Link} from 'react-router-dom';
+import Loader from 'react-loader-spinner'
 
 
 class Posts extends Component{
     state = {
         Posts: [],
-        viewShow: 4,
         // selectedId: null,
         CurrentPage : 1,
-        NextPage: 2
+        NextPage: 2,
+        boolean : true,
+        loaded:true
     }
 
 
@@ -23,36 +24,34 @@ class Posts extends Component{
         axios.get('https://assignment-appstreet.herokuapp.com/api/v1/products?page='+ this.state.CurrentPage)
         .then(response=>{
             const temp = response.data.products;
-            this.setState({Posts: temp});
+            this.setState({Posts: temp,loaded:false});
             //console.log(response);
         })
     }
 
     componentDidUpdate(){
-        if(this.state.CurrentPage === this.state.NextPage){
-
+        if((this.state.CurrentPage === this.state.NextPage) && this.state.boolean){
             axios.get('https://assignment-appstreet.herokuapp.com/api/v1/products?page='+ this.state.CurrentPage)
             .then(response=>{
-            const temp = response.data.products;
-            var newPosts = [...this.state.Posts];
-            // console.log(newPosts);
-            var newPosts1 = newPosts.concat(temp);
-            // console.log(newPosts);
-            // console.log(temp)
-            const newNext = this.state.CurrentPage + 1;
-            this.setState({Posts: newPosts1,NextPage:newNext});
+            let temp = response.data.products;
+            if(temp.length === 0){
+                this.setState({boolean: false});
+            }
+            else{
+                let newPosts = this.state.Posts;
+                newPosts = newPosts.concat(temp);
+                var newNext = this.state.NextPage ;
+                newNext++;
+                this.setState({Posts: newPosts,NextPage:newNext});
+            }
             })
         }
     }
 
-    ChangeViewHandler(){
-        // if(Posts.size){
-        //     var temp = this.state.viewShow;
-        //     temp += 4;
-        //     this.setState({viewShow: temp})
-        // }
+    ChangeViewHandler = () => {
         var newPage = this.state.NextPage;
         this.setState({CurrentPage: newPage});
+        console.log(this.state.CurrentPage)
     }
 
     postSelectedHandler =(id)=>{
@@ -75,16 +74,29 @@ class Posts extends Component{
                             />
         });
 
+        if(this.state.loaded){
+            return(
+                <div id="loading">
+                    <Loader type="Hearts" color="#somecolor" height={80} width={80} />
+                </div>
+            )
+        }
+
+
+
         return(
             <div>
+                { tempArr && tempArr.length >0 &&
+                <OnScroll
+                    triggers={[
+                        { top: 50, bottom: -50, callback: visible => this.ChangeViewHandler(visible) },
+                    ]}>
 
-                <section className = "Posts">
+                <div className = "Posts" >
                     {posts}
-                </section>
-                <button onClick={this.ChangeViewHandler.bind(this)} style={{margin:'auto', display:'block'}} > Load More </button>
-                {/* <ScrollEvent handleScrollCallback={this.ChangeViewHandler.bind(this)} /> */}
-                {/* <button onClick={this.ChangePageHandler.bind(this)} style={{margin:'auto', display:'block'}}>Page {this.state.NextPage}</button> */}
+                </div>
         
+                </OnScroll>}
             </div>
         )
        

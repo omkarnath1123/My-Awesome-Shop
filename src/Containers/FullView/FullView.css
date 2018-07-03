@@ -9,7 +9,15 @@
 
     min-height: 450px;
     max-height: 451px;
+}
 
+.loadMoreBtn{
+    border: none;
+    text-decoration: underline;
+    color: blue;
+}
+#full{
+    margin-bottom: 50px;
 }
 
 

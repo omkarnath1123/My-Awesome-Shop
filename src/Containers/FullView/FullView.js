@@ -168,7 +168,7 @@ class FullView extends Component {
                             newArr.push(new Object({original:pics,thumbnail:pics}));
                         })
                     //LoadMoreInfo Button
-                    var loadMoreButton = <button onClick={()=>this.loadPageHandler(post.length)} className="btn btn-info">More!</button>;
+                    var loadMoreButton = <button onClick={()=>this.loadPageHandler(post.length)} className="loadMoreBtn">More!</button>;
                     if(this.state.pageLength === post.length){
                         loadMoreButton = null;
                     }
@@ -210,7 +210,7 @@ class FullView extends Component {
             }
 
 
-            return <div>
+            return <div id="full">
                 
                     <div className='row'>
                         <div className="col-sm-2 col-md-2 col-lg-2"></div>

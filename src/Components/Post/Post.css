@@ -10,6 +10,7 @@ img:hover {
 
 .Post {
     width: 250px;
+    /* height: 500px; */
     padding: 16px;
     text-align: center;
     border: 1px solid #eee;

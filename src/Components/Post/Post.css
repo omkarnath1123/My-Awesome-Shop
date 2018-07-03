@@ -1,5 +1,5 @@
 img {
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     border-radius: 4px;
     padding: 5px;
     width: 150px;
@@ -13,14 +13,34 @@ img:hover {
     /* height: 500px; */
     padding: 16px;
     text-align: center;
-    border: 1px solid #eee;
-    box-shadow: 0 2px 3px #ccc;
+    /* border: 1px solid #eee; */
+    /* box-shadow: 0 2px 3px #ccc; */
     margin: 10px;
     box-sizing: border-box;
     cursor: pointer;
 }
 
-.Post:hover,
+/* .Post:hover,
 .Post:active {
     background-color: #C0DDF5;
+} */
+
+.caption{
+    /* box-shadow: 0 2px 3px #cccccc; */
+    max-width: 250px;
+    min-width: 250px;
+    min-height: 100px;
+    max-height: 100px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    /* border: 2px solid red; */
+}
+
+.imageThumb{
+    max-width: 250px;
+    min-width: 250px;
+
+    min-height: 250px;
+    max-height: 250px;
+
 }

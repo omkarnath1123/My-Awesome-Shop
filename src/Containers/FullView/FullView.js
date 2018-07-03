@@ -214,7 +214,7 @@ class FullView extends Component {
                 
                     <div className='row'>
                         <div className="col-sm-2 col-md-2 col-lg-2"></div>
-                        <div className="col-sm-4 col-md-4 col-lg-4 divCl">
+                        <div className="col-sm-4 col-md-4 col-lg-4 ">
                             <br/>
                             <br/>
 
@@ -228,6 +228,7 @@ class FullView extends Component {
                             <h1><em><strong>{proName}</strong></em></h1>
                             <br/>
                             <p>{postTemp} {loadMoreButton}</p>
+                            <hr/>
                             <h4><p>MRP : <span style={{textDecoration:'line-through'}}><strong>₹{proMarkPrice}</strong> </span> </p></h4>
                             <p>Discount: ₹{discount} </p>
                             <p>Price: ₹{proSalePrice}</p>

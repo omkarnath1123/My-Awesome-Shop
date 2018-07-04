@@ -7,8 +7,6 @@ import Coloroptions from '../../Components/Options/ColorOptions';
 import Storageoptions from '../../Components/Options/StorageOptions';
 import Loader from 'react-loader-spinner'
 
-
-
 class FullView extends Component {
 
         state = {
@@ -32,9 +30,7 @@ class FullView extends Component {
             this.setState({pageLength:length})
         }
 
-
         isEqual(arr1,arr2){
-
             if ((arr1[0] ===  arr2[0] && arr1[1] === arr2[1]) || (arr1[0] ===  arr2[1] && arr1[1] === arr2[0]) ){
                 return true;
             }
@@ -56,7 +52,6 @@ class FullView extends Component {
                     AttrName = i.name;
                 }
             })
-
             if(AttrName === "Storage") {
                 return false;
             }
@@ -67,7 +62,6 @@ class FullView extends Component {
 
         handleColorButtons = (colorButtonId) =>{
             let tempArr = this.state.selectedOptions;
-            ////
             var TempOpt = this.state.loadedPost.options;
             var tempAttrid = null;
             TempOpt.map(findId=>{
@@ -76,7 +70,6 @@ class FullView extends Component {
                 }
             })
             var tempAttrArr = this.state.loadedPost.attributes;
-
             var tempAttrName = null;
             tempAttrArr.map(fId=>{
                 if(fId._id === tempAttrid){
@@ -95,9 +88,7 @@ class FullView extends Component {
         }
 
         handleStoreButtons = (storeButtonId) =>{
-  
             let tempArr = this.state.selectedOptions;
-            ////
             var TempOpt = this.state.loadedPost.options;
             var tempAttrid = null;
             TempOpt.map(findId=>{
@@ -105,16 +96,13 @@ class FullView extends Component {
                     tempAttrid = findId.attrib_id;
                 }
             })
-
             var tempAttrArr = this.state.loadedPost.attributes;
-
             var tempAttrName = null;
             tempAttrArr.map(fId=>{
                 if(fId._id === tempAttrid){
                     tempAttrName = fId.name;
                 }
             })
-
             if(tempAttrName === 'Storage'){
                 if(!this.isColorId(tempArr[0])){
                     var temp = tempArr[1];
@@ -126,24 +114,17 @@ class FullView extends Component {
             }
         }
         
-        
-
-
         render(){
 
             let post = <p style={{textAlign:'center'}}>Please select an Item!</p>;
             if(this.props.match.params.id){
-                <p style={{textAlign:'center'}}>Loading!!</p>
+                post = <p style={{textAlign:'center'}}>Loading!!</p>
             }
             var storageButton = null
             var colorButton = null
             if(this.state.loadedPost){
-
                 post = this.state.loadedPost.primary_product.desc;
                 var postTemp = post.slice(0,this.state.pageLength);
-              
-
-
                 var proVariations = this.state.loadedPost.product_variations;
                 var tempArrImage = [];
                 var proName = [];
@@ -160,13 +141,12 @@ class FullView extends Component {
                         }
                     })
 
-
-
                     //Carousel
-                    var newArr = new Array;
+                    var newArr = [];
                     tempArrImage.map(pics=>{
-                            newArr.push(new Object({original:pics,thumbnail:pics}));
+                            newArr.push({original:pics,thumbnail:pics});
                         })
+
                     //LoadMoreInfo Button
                     var loadMoreButton = <button onClick={()=>this.loadPageHandler(post.length)} className="loadMoreBtn">More!</button>;
                     if(this.state.pageLength === post.length){
@@ -209,29 +189,25 @@ class FullView extends Component {
                 )
             }
 
-
             return <div id="full">
-                
                     <div className='row'>
                         <div className="col-sm-2 col-md-2 col-lg-2"></div>
                         <div className="col-sm-4 col-md-4 col-lg-4 ">
                             <br/>
                             <br/>
-
                             <div >
                                 <ImageGallery items={newArr} showPlayButton={false} showFullscreenButton={false} />
                             </div>
                         </div>
                         <div className="col-sm-4 col-md-4 col-lg-4">
                             <br/>
-                        
                             <h1><em><strong>{proName}</strong></em></h1>
                             <br/>
                             <p>{postTemp} {loadMoreButton}</p>
                             <hr/>
                             <h4><p>MRP : <span style={{textDecoration:'line-through'}}><strong>₹{proMarkPrice}</strong> </span> </p></h4>
-                            <p>Discount: ₹{discount} </p>
-                            <p>Price: ₹{proSalePrice}</p>
+                            <p>Discount: {discount} </p>
+                            <p>Price: ₹ {Math.trunc(proSalePrice)}</p>
                             <hr/>
                                 {storageButton}
                                 {colorButton}

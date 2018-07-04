@@ -20,12 +20,10 @@ class Posts extends Component{
 
 
     componentDidMount(){
-        // console.log(this.props);
         axios.get('https://assignment-appstreet.herokuapp.com/api/v1/products?page='+ this.state.CurrentPage)
         .then(response=>{
             const temp = response.data.products;
             this.setState({Posts: temp,loaded:false});
-            //console.log(response);
         })
     }
 

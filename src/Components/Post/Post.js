@@ -9,7 +9,7 @@ const Post = props =>(
                 return <img src={photos} key ={photos}   />
             })} */}
             <div>
-                <img src={props.pic[0]} class="imageThumb"/>
+                <img src={props.pic[0]} className="imageThumb img-fluid" alt="props.title"/>
             </div>
             <div className="caption">
                 <h6>{props.title}</h6>

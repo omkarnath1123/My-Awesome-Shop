@@ -3,7 +3,7 @@ import './bottomNav.css';
 
 const Navigation = ()=>{
    return(
-    <div class="navbar">
+    <div className="navbar">
         <a href="#home" >About</a>
         <a href="#contact">Contact</a>
         <a href="#Privacy">Privacy</a>

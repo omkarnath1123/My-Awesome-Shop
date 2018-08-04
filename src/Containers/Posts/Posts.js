@@ -3,14 +3,12 @@ import Post from '../../Components/Post/Post';
 import axios from 'axios';
 import './Posts.css';
 import OnScroll from 'react-on-scroll';
-// import {Link} from 'react-router-dom';
-import Loader from 'react-loader-spinner'
+import LoadingSpinner from '../FullView/LodingSpinner';
 
 
 class Posts extends Component{
     state = {
         Posts: [],
-        // selectedId: null,
         CurrentPage : 1,
         NextPage: 2,
         boolean : true,
@@ -49,7 +47,7 @@ class Posts extends Component{
     ChangeViewHandler = () => {
         var newPage = this.state.NextPage;
         this.setState({CurrentPage: newPage});
-        console.log(this.state.CurrentPage)
+        // console.log(this.state.CurrentPage)
     }
 
     postSelectedHandler =(id)=>{
@@ -75,7 +73,7 @@ class Posts extends Component{
         if(this.state.loaded){
             return(
                 <div id="loading">
-                    <Loader type="Hearts" color="#somecolor" height={80} width={80} />
+                    <LoadingSpinner />
                 </div>
             )
         }
@@ -89,8 +87,7 @@ class Posts extends Component{
                     triggers={[
                         { top: 50, bottom: -50, callback: visible => this.ChangeViewHandler(visible) },
                     ]}>
-
-                <div className = "Posts" >
+                <div className = "col-sm-12 col-md-12 col-lg-12 Posts" >
                     {posts}
                 </div>
         

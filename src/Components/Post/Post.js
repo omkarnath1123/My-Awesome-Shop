@@ -12,8 +12,16 @@ const Post = props =>(
                 <img src={props.pic[0]} className="imageThumb img-fluid" alt="props.title"/>
             </div>
             <div className="caption">
-                <h6>{props.title}</h6>
-                <p>Sale Price: ₹ {Math.trunc(props.salePrice)}</p>
+                <h6 style={{color: 'grey'}}>{props.title}</h6>
+                <strong><p style={{color: 'grey',textAlign: 'center',fontSize: '1.1em',}}>    Sale Price:
+                    ₹&nbsp;
+                    {
+                        Number(parseFloat(Math.trunc(props.salePrice)).toFixed(2)).toLocaleString('en', {
+                            minimumFractionDigits: 2
+                        })
+                    }
+                    {/*{Math.trunc(props.salePrice)}*/}
+                    </p></strong>
                 <br/>
             </div>
     </article>

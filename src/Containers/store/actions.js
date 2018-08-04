@@ -1,0 +1,6 @@
+export const INCREMENT = 'INCREMENT';
+export const REMOVE = 'REMOVE';
+export const  STORE_RESULT = 'STORE_RESULT';
+export const DELETE_RESULT = 'DELETE_RESULT';
+export const REMOVE_COUNTER = 'REMOVE_COUNTER';
+export const REMOVE_RESULTS = 'REMOVE_RESULTS'

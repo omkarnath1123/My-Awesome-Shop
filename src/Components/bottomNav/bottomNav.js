@@ -4,10 +4,10 @@ import './bottomNav.css';
 const Navigation = ()=>{
    return(
     <div className="navbar">
-        <a href="#home" >About</a>
-        <a href="#contact">Contact</a>
-        <a href="#Privacy">Privacy</a>
-        <a href="#Policy">Policy</a>
+        <a href="#about" >About </a>  |
+        <a href="#contact"> Contact </a>  |
+        <a href="#Privacy"> Privacy Policy </a>  |
+        <a href="#Policy"> Return Policy </a>
 
     </div>
          );
